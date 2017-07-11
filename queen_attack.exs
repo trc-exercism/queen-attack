@@ -51,6 +51,10 @@ defmodule Queens do
   """
   @spec can_attack?(Queens.t()) :: boolean
   def can_attack?(queens) do
-    true
+    is_same_row_or_column?(queens) or is_same_diagonal?(queens)
   end
+
+  defp is_same_row_or_column?(%{:white => {wy, wx}, :black => {by, bx}}), do: wy == by or wx == bx
+
+  defp is_same_diagonal?(%{:white => {wy, wx}, :black => {by, bx}}), do: abs(by - wy) == abs(bx - wx)
 end
